@@ -1,34 +1,88 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion buildConfig.compileSdk
     buildToolsVersion "29.0.2"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
-        applicationId "pt.rn.testapp"
-        minSdkVersion 23
-        targetSdkVersion 29
+        applicationId "pt.rn.movies"
+        testApplicationId "pt.rn.movies.test"
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "cucumber.api.android.CucumberAndroidJUnitRunner"
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation sys.kotlin.stdlib.jdk
+    implementation sys.jetbrainsAnnotations
+    implementation sys.kotlin.coroutines.android
+    implementation sys.material
+    implementation oss.androidx.appCompat
+    implementation oss.androidx.core
+    implementation oss.androidx.constraintLayout
+    implementation oss.androidx.lifecycle.extensions
+    implementation oss.androidx.lifecycle.viewModel
+    implementation oss.androidx.lifecycle.liveData
+    implementation oss.androidx.lifecycle.common
+    implementation oss.androidx.preference
+    implementation oss.androidx.room.runtime
+    implementation oss.androidx.room.kotlin
+    implementation oss.androidx.navigation.ui
+    implementation oss.androidx.navigation.fragment
+    implementation oss.retrofit.client
+    implementation oss.retrofit.converterMoshi
+    implementation oss.okhttp.client
+    implementation oss.okhttp.logging
+    implementation oss.koin.android
+    implementation oss.koin.scope
+    implementation oss.koin.viewModel
+    implementation oss.timber
+    implementation oss.paging
+
+    kapt oss.androidx.room.compiler
+
+    testImplementation sys.junit
+
+    androidTestImplementation oss.androidx.test.junit
+    androidTestImplementation oss.androidx.test.espresso
 }

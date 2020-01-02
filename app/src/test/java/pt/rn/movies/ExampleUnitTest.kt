@@ -1,4 +1,4 @@
-package pt.rn.testapp
+package pt.rn.movies
 
 import org.junit.Test
 
