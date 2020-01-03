@@ -35,6 +35,7 @@ class SplashFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         observeLiveData()
 
         savedInstanceState?.let {

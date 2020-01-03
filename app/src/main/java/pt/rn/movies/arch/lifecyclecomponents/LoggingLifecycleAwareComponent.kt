@@ -12,22 +12,22 @@ class LoggingLifecycleAwareComponent : LifecycleObserver {
     private lateinit var tag: String
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() = Timber.tag(tag).d("onCreate()")
+    fun onCreate() = Timber.tag(tag).d("Activity: onCreate()")
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun onResume() = Timber.tag(tag).d("onResume()")
+    fun onResume() = Timber.tag(tag).d("Activity: onResume()")
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onStart() = Timber.tag(tag).d("onStart()")
+    fun onStart() = Timber.tag(tag).d("Activity: onStart()")
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun onPause() = Timber.tag(tag).d("onPause()")
+    fun onPause() = Timber.tag(tag).d("Activity: onPause()")
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop() = Timber.tag(tag).d("onStop()")
+    fun onStop() = Timber.tag(tag).d("Activity: onStop()")
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() = Timber.tag(tag).d("onDestroy()")
+    fun onDestroy() = Timber.tag(tag).d("Activity: onDestroy()")
 
     companion object {
         fun bindObserver(activity: FragmentActivity): LoggingLifecycleAwareComponent {

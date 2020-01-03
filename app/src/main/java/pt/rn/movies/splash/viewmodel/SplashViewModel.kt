@@ -1,5 +1,6 @@
 package pt.rn.movies.splash.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +10,10 @@ import pt.rn.movies.splash.viewmodel.entities.SplashViewState
 
 class SplashViewModel : ViewModel() {
 
-    val stateLiveData by lazy {
+    val stateLiveData : LiveData<SplashViewState>
+        get() = _stateLiveData
+
+    private val _stateLiveData by lazy {
         MutableLiveData<SplashViewState>()
     }
 
@@ -19,9 +23,9 @@ class SplashViewModel : ViewModel() {
 
     private fun startSplash() {
         viewModelScope.launch {
-            stateLiveData.value = SplashViewState.ShowSplash
+            _stateLiveData.value = SplashViewState.ShowSplash
             delay(SPLASH_DURATION)
-            stateLiveData.value = SplashViewState.FinishSplash
+            _stateLiveData.value = SplashViewState.FinishSplash
         }
     }
 
